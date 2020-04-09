@@ -1,9 +1,5 @@
 name: docker
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,6 +8,6 @@ jobs:
     - run: docker login -u agilenatives -p ${DOCKERHUB_TOKEN}
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-    - run: docker build . --file Dockerfile --tag agilenatives/release:$(git rev-parse --short "$GITHUB_SHA") --tag agilenatives/release:latest
-    - run: docker push agilenatives/release:$(git rev-parse --short "$GITHUB_SHA")
-    - run: docker push agilenatives/release:latest
+    - run: docker build . --file Dockerfile --tag agilenatives/release:$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:${GITHUB_REF##*/}
+    - run: docker push agilenatives/release:$(git rev-parse --short ${GITHUB_SHA})
+    - run: docker push agilenatives/release:${GITHUB_REF##*/}

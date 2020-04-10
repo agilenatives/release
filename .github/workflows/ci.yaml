@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: docker login -u agilenatives -p ${DOCKERHUB_TOKEN}
+    - run: echo ${DOCKERHUB_TOKEN} | docker login --username agilenatives --password-stdin
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
     - run: docker build . --file Dockerfile --tag agilenatives/release:$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:${GITHUB_REF##*/}

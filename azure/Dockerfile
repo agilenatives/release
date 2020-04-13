@@ -1,6 +1,28 @@
-FROM alpine
+FROM python:alpine
 
 RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh zip
+
+ENV AZURE_CLI_VERSION=2.2.0
+RUN apk add --no-cache perl \
+    && apk add --no-cache --virtual .build-deps gcc make openssl-dev libffi-dev musl-dev linux-headers \
+    && apk add --no-cache libintl icu-libs libc6-compat \
+    && update-ca-certificates
+RUN curl -LO https://github.com/Azure/azure-cli/archive/azure-cli-${AZURE_CLI_VERSION}.zip \
+    && unzip azure-cli-${AZURE_CLI_VERSION}.zip \
+    && rm -f azure-cli-${AZURE_CLI_VERSION}.zip \
+    && mv azure-cli-azure-cli-${AZURE_CLI_VERSION} azure-cli \
+    && azure-cli/scripts/install_full.sh \
+    && cat azure-cli/az.completion > /root/.bashrc \
+    && rm -rf azure-cli
+RUN apk add --virtual .rundeps $( \
+      scanelf --needed --nobanner --recursive /usr/local \
+      | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+      | sort -u \
+      | xargs -r apk info --installed \
+      | sort -u \
+    ) \
+    && dos2unix /root/.bashrc /usr/local/bin/az
+RUN az --version
 
 ENV TERRAFORM_VERSION=0.12.24
 RUN curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \

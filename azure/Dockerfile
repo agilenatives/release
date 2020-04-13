@@ -13,15 +13,15 @@ RUN  apt-get update \
     lsb-release \
     unzip
 
-ENV AZURE_CLI_VERSION=2.2.0
+ENV AZ_VERSION=2.2.0-1
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
     gpg --dearmor | \
-    tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | \
-    tee /etc/apt/sources.list.d/azure-cli.list
-RUN  apt-get update \
+    tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null \
+    && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | \
+    tee /etc/apt/sources.list.d/azure-cli.list \
+    && apt-get update \
     && apt-get install -y --no-install-recommends \
-    azure-cli=${AZURE_CLI_VERSION}-1~xenial
+    azure-cli=${AZ_VERSION}~xenial
 RUN az --version
 
 ENV TERRAFORM_VERSION=0.12.24

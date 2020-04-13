@@ -1,6 +1,6 @@
 FROM python:alpine
 
-RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh zip
+RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh sudo shadow zip
 
 ENV AZURE_CLI_VERSION=2.2.0
 RUN apk add --no-cache perl \

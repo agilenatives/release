@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh zip
+RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh sudo shadow zip
 
 ENV TERRAFORM_VERSION=0.12.24
 RUN curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \

@@ -12,9 +12,12 @@ jobs:
     - run: echo ${DOCKERHUB_TOKEN} | docker login --username agilenatives --password-stdin
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-    - run: docker build . --tag agilenatives/release:$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:latest
+    - run: docker build . --file Dockerfile --tag agilenatives/release:$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:latest
     - run: docker push agilenatives/release:$(git rev-parse --short ${GITHUB_SHA})
     - run: docker push agilenatives/release:latest
-    - run: docker build azure --tag agilenatives/release:azure-$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:azure
+    - run: docker build azure --file azure/Dockerfile --tag agilenatives/release:azure-$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:azure
     - run: docker push agilenatives/release:azure-$(git rev-parse --short ${GITHUB_SHA})
     - run: docker push agilenatives/release:azure
+    - run: docker build azure --file azure/Dockerfile.alpine --tag agilenatives/release:azure-alpine-$(git rev-parse --short ${GITHUB_SHA}) --tag agilenatives/release:azure-alpine
+    - run: docker push agilenatives/release:azure-alpine-$(git rev-parse --short ${GITHUB_SHA})
+    - run: docker push agilenatives/release:azure-alpine

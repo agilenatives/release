@@ -46,5 +46,3 @@ RUN curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
     && chmod +x /usr/bin/helm \
     && rm -rf linux-amd64
 RUN helm version --client
-
-CMD /bin/bash

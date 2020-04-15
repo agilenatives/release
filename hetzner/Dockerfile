@@ -11,6 +11,7 @@ RUN  apt-get update \
     gnupg \
     jq \
     lsb-release \
+    sudo \
     unzip
 
 ENV HCLOUD_VERSION=1.16.2
@@ -43,3 +44,8 @@ RUN curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
     && chmod +x /usr/local/bin/helm \
     && rm -rf linux-amd64
 RUN helm version --client
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    postgresql-client
+RUN psql -V

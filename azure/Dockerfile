@@ -11,6 +11,7 @@ RUN  apt-get update \
     gnupg \
     jq \
     lsb-release \
+    sudo \
     unzip
 
 ENV AZ_VERSION=2.2.0-1

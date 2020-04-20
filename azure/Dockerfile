@@ -52,3 +52,13 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     postgresql-client
 RUN psql -V
+
+RUN curl -sL https://www.mongodb.org/static/pgp/server-4.2.asc | \
+    apt-key add - \
+    && echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu $(lsb_release -cs)/mongodb-org/4.2 multiverse" | \
+    tee /etc/apt/sources.list.d/mongodb-org-4.2.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+    mongodb-org-shell \
+    mongodb-org-tools
+RUN mongo --version

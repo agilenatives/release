@@ -2,14 +2,6 @@ FROM alpine
 
 RUN apk add --no-cache bash curl coreutils ca-certificates git jq make openssl openssh sudo shadow zip
 
-ENV HCLOUD_VERSION=1.16.2
-RUN curl -LO https://github.com/hetznercloud/cli/releases/download/v${HCLOUD_VERSION}/hcloud-linux-amd64.tar.gz \
-    && tar xf hcloud-linux-amd64.tar.gz \
-    && rm -f hcloud-linux-amd64.tar.gz \
-    && mv hcloud /usr/bin/hcloud \
-    && chmod +x /usr/bin/hcloud 
-RUN hcloud version
-
 ENV TERRAFORM_VERSION=0.12.24
 RUN curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
     && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip \

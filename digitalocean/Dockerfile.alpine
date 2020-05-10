@@ -26,7 +26,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v${KUBECT
     && chmod +x /usr/bin/kubectl
 RUN kubectl version --client
 
-ENV HELM_VERSION=3.1.0
+ENV HELM_VERSION=3.2.1
 RUN curl -LO https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
     && tar xf helm-v${HELM_VERSION}-linux-amd64.tar.gz \
     && rm -f helm-v${HELM_VERSION}-linux-amd64.tar.gz \

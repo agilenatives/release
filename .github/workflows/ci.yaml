@@ -12,8 +12,11 @@ jobs:
     - run: echo ${DOCKERHUB_TOKEN} | docker login --username agilenatives --password-stdin
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        
     - run: docker build . --file Dockerfile --tag agilenatives/release:latest
     - run: docker push agilenatives/release:latest
+    - run: docker build . --file Dockerfile.alpine --tag agilenatives/release:latest-alpine
+    - run: docker push agilenatives/release:latest-alpine
 
     - run: docker build azure --file azure/Dockerfile --tag agilenatives/release:azure
     - run: docker push agilenatives/release:azure

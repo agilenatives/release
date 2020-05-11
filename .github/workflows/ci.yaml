@@ -12,23 +12,18 @@ jobs:
     - run: echo ${DOCKERHUB_TOKEN} | docker login --username agilenatives --password-stdin
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-        
+
+    - run: docker build amazon --file amazon/Dockerfile --tag agilenatives/release:amazon
+    - run: docker push agilenatives/release:amazon
+
     - run: docker build . --file Dockerfile --tag agilenatives/release:latest
     - run: docker push agilenatives/release:latest
-    - run: docker build . --file Dockerfile.alpine --tag agilenatives/release:latest-alpine
-    - run: docker push agilenatives/release:latest-alpine
 
     - run: docker build azure --file azure/Dockerfile --tag agilenatives/release:azure
     - run: docker push agilenatives/release:azure
-    - run: docker build azure --file azure/Dockerfile.alpine --tag agilenatives/release:azure-alpine
-    - run: docker push agilenatives/release:azure-alpine
 
     - run: docker build hetzner --file hetzner/Dockerfile --tag agilenatives/release:hetzner
     - run: docker push agilenatives/release:hetzner
-    - run: docker build hetzner --file hetzner/Dockerfile.alpine --tag agilenatives/release:hetzner-alpine
-    - run: docker push agilenatives/release:hetzner-alpine
 
     - run: docker build digitalocean --file digitalocean/Dockerfile --tag agilenatives/release:digitalocean
     - run: docker push agilenatives/release:digitalocean
-    - run: docker build digitalocean --file digitalocean/Dockerfile.alpine --tag agilenatives/release:digitalocean-alpine
-    - run: docker push agilenatives/release:digitalocean-alpine

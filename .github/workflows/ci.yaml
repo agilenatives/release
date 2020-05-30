@@ -13,11 +13,11 @@ jobs:
       env:
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - run: docker build amazon --file amazon/Dockerfile --tag agilenatives/release:amazon
-    - run: docker push agilenatives/release:amazon
-
     - run: docker build . --file Dockerfile --tag agilenatives/release:latest
     - run: docker push agilenatives/release:latest
+
+    - run: docker build amazon --file amazon/Dockerfile --tag agilenatives/release:amazon
+    - run: docker push agilenatives/release:amazon
 
     - run: docker build azure --file azure/Dockerfile --tag agilenatives/release:azure
     - run: docker push agilenatives/release:azure
@@ -27,3 +27,6 @@ jobs:
 
     - run: docker build digitalocean --file digitalocean/Dockerfile --tag agilenatives/release:digitalocean
     - run: docker push agilenatives/release:digitalocean
+
+    - run: docker build openshift --file openshift/Dockerfile --tag agilenatives/release:openshift
+    - run: docker push agilenatives/release:openshift

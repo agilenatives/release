@@ -14,13 +14,8 @@ RUN  apt-get update \
     sudo \
     unzip
 
-ENV OC_VERSION=3.11.0
-RUN curl -LO https://github.com/openshift/origin/releases/download/v${OC_VERSION}/openshift-origin-client-tools-v${OC_VERSION}-0cbc58b-linux-64bit.tar.gz \
-    && tar xf openshift-origin-client-tools-v${OC_VERSION}-0cbc58b-linux-64bit.tar.gz \
-    && rm -f openshift-origin-client-tools-v${OC_VERSION}-0cbc58b-linux-64bit.tar.gz \
-    && mv openshift-origin-client-tools-v${OC_VERSION}-0cbc58b-linux-64bit/oc /usr/local/bin/oc \
-    && rm -rf openshift-origin-client-tools-v${OC_VERSION}-0cbc58b-linux-64bit \
-    && chmod +x /usr/local/bin/oc
+COPY oc /usr/local/bin/oc
+RUN chmod +x /usr/local/bin/oc
 RUN oc version
 
 ENV TERRAFORM_VERSION=0.12.24

@@ -14,8 +14,12 @@ RUN  apt-get update \
     sudo \
     unzip
 
-COPY oc /usr/local/bin/oc
-RUN chmod +x /usr/local/bin/oc
+ENV OC_VERSION=4.4.0
+RUN curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OC_VERSION}/openshift-client-linux.tar.gz \
+    && tar xf openshift-client-linux.tar.gz \
+    && rm -f openshift-client-linux.tar.gz \
+    && mv oc /usr/local/bin/oc \
+    && chmod +x /usr/local/bin/oc
 RUN oc version
 
 ENV TERRAFORM_VERSION=0.12.24

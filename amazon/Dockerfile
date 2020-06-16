@@ -12,6 +12,7 @@ RUN  apt-get update \
     jq \
     lsb-release \
     sudo \
+    openssh-server \
     unzip
 
 ENV AWS_VERSION=2

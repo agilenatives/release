@@ -12,6 +12,7 @@ RUN  apt-get update \
     jq \
     lsb-release \
     sudo \
+    openssh-server \
     unzip
 
 ENV AZ_VERSION=2.2.0-1

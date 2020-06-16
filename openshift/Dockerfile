@@ -12,6 +12,7 @@ RUN  apt-get update \
     jq \
     lsb-release \
     sudo \
+    openssh-server \
     unzip
 
 ENV OC_VERSION=4.4.0

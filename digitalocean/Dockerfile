@@ -12,6 +12,7 @@ RUN  apt-get update \
     jq \
     lsb-release \
     sudo \
+    openssh-server \
     unzip
 
 ENV DOCTL_VERSION=1.41.0

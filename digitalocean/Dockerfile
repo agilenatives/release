@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV DOCTL_VERSION=1.41.0
 RUN curl -LO https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz \

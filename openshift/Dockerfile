@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV OC_VERSION=4.4.0
 RUN curl -LO https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OC_VERSION}/openshift-client-linux.tar.gz \

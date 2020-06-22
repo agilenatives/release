@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV AWS_VERSION=2
 RUN curl -LO https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip \

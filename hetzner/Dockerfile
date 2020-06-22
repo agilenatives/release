@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV HCLOUD_VERSION=1.16.2
 RUN curl -LO https://github.com/hetznercloud/cli/releases/download/v${HCLOUD_VERSION}/hcloud-linux-amd64.tar.gz \

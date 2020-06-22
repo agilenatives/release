@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV TERRAFORM_VERSION=0.12.24
 RUN curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \

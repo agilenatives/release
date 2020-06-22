@@ -13,7 +13,8 @@ RUN  apt-get update \
     lsb-release \
     sudo \
     openssh-server \
-    unzip
+    unzip \
+    zip
 
 ENV AZ_VERSION=2.2.0-1
 RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | \
